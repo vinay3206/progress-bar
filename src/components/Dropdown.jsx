@@ -57,7 +57,7 @@ class Dropdown extends React.Component {
         width={this.props.width}
         style={style}
       >
-        {maxRows > 1 && <i aria-hidden="true" className="dropdown icon" />}
+        {maxRows > 1 && <i aria-hidden="true" className="dropdown icon fa fa-arrow-down" />}
         <div
           role="button"
           className="selected-label"

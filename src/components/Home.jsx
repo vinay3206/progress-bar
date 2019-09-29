@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProgressBar from './Progress-Bar'
+import ProgressBar from './Progress-Bar';
+import { Dropdown } from './Dropdown';
+import Button from './Button';
 
 const FlexContainer = styled.div`
   height: 100%;
@@ -25,9 +27,26 @@ const FlexItem = styled.div`
   margin: 10px;
   line-height: 20px;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1em;
   text-align: center;
 `;
+
+const Flex = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+
+const dropDownList = [
+  {
+    label: 'Progress1',
+    value: 'Progress1',
+  },
+  {
+    label: "Progress2",
+    value: "Progress2",
+  }
+]
 
 
 const Home = () => (
@@ -36,8 +55,18 @@ const Home = () => (
       <FlexItem>
         <ProgressBar />
       </FlexItem>
-      <FlexItem>Home</FlexItem>
-      <FlexItem>Home</FlexItem>
+      <FlexItem>
+        <Flex>
+          <Dropdown 
+            items={dropDownList}
+            selectedValue="Progress1"
+            onChangeHandler={() => {}}
+            maxRows={15}
+            width="140px"
+          />
+          <Button text="25" icon="fa-plus"/>
+        </Flex>
+      </FlexItem>
     </Row>
   </FlexContainer>
 );
