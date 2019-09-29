@@ -40,42 +40,71 @@ const Flex = styled.div`
   justify-content: space-between;
 `
 
-
-const dropDownList = [
-  {
-    label: 'Progress1',
-    value: 'Progress1',
-  },
-  {
-    label: "Progress2",
-    value: "Progress2",
-  }
-]
-
-
 class Home extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedProgress: '0',
+    };
+  }
+
+  onProgressBarChange = (value) => {
+    this.setState({
+      selectedProgress: value,
+    })
+  }
+
   componentDidMount() {
     const { getProgress } = this.props.actions;
     getProgress();
   }
 
   render() {
+    const { buttons, bars, progressBars } = this.props;
+    const { selectedProgress } = this.state;
+
+    const progressBarList = bars.map((bar, index) => {
+      return {
+        label: `Progress ${ index + 1 }`,
+        value: `${index}`,
+      }
+    })
+
     return(
       <FlexContainer>
         <Row>
           <FlexItem>
-            <ProgressBar />
+            {
+              progressBars.map(bar => {
+                return (
+                  <ProgressBar key={bar} progress={bar} />
+                )
+              })
+            }
           </FlexItem>
           <FlexItem>
             <Flex>
-              <Dropdown 
-                items={dropDownList}
-                selectedValue="Progress1"
-                onChangeHandler={() => {}}
-                maxRows={15}
-                width="140px"
-              />
-              <Button text="25" icon="fa-plus"/>
+              {
+                progressBarList.length
+                ?
+                  <Dropdown 
+                    items={progressBarList}
+                    selectedValue={selectedProgress}
+                    onChangeHandler={this.onProgressBarChange}
+                    maxRows={15}
+                    width="140px"
+                  />  
+                :
+                  ''
+              }
+              {
+                buttons.map(val => {
+                  return (
+                    <Button text={val} key={val} icon={ (val < 0) ? 'fa-minues' : 'fa-plus' } />
+                  )
+                })
+              }
             </Flex>
           </FlexItem>
         </Row>
@@ -86,6 +115,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   ...state.progressData,
+  progressBars: state.progressData.bars.map(bar => Math.round((bar*100)/state.progressData.limit))
 })
 
 const mapDispatchToProps = dispatch => ({

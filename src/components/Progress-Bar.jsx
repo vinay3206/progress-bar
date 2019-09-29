@@ -37,18 +37,14 @@ const StyledProgressBar = styled.div`
 class ProgressBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      progressFrom: 0,
-      progressTo: 60,
-    };
   }
 
   render() {
-    const { progressFrom, progressTo } = this.state;
+    const { progress } = this.props;
     return (
       <StyledContainer>
         <ProgressBarContainer>
-          <StyledProgressBar from={progressFrom} to={progressTo}>{progressTo}{' '}% </StyledProgressBar>
+          <StyledProgressBar from={0} to={progress}>{progress}{' '}% </StyledProgressBar>
         </ProgressBarContainer>
       </StyledContainer>
     );

@@ -20,8 +20,9 @@ export default createReducer(initialStates, {
         isFetching: true
     }),
 
-    [GET_PROGRESS_SUCCESS]: (state, payload) => ({
+    [GET_PROGRESS_SUCCESS]: (state, { data }) => ({
         ...state,
+        ...data,
         isFetching: false,
     }),
 
