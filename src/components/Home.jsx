@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import ProgressBar from './Progress-Bar';
 import { Dropdown } from './Dropdown';
 import Button from './Button';
+import { getProgress } from '../redux/actions'
 
 const FlexContainer = styled.div`
   height: 100%;
@@ -49,26 +53,50 @@ const dropDownList = [
 ]
 
 
-const Home = () => (
-  <FlexContainer>
-    <Row>
-      <FlexItem>
-        <ProgressBar />
-      </FlexItem>
-      <FlexItem>
-        <Flex>
-          <Dropdown 
-            items={dropDownList}
-            selectedValue="Progress1"
-            onChangeHandler={() => {}}
-            maxRows={15}
-            width="140px"
-          />
-          <Button text="25" icon="fa-plus"/>
-        </Flex>
-      </FlexItem>
-    </Row>
-  </FlexContainer>
-);
+class Home extends React.Component {
+  componentDidMount() {
+    const { getProgress } = this.props.actions;
+    getProgress();
+  }
 
-export default Home;
+  render() {
+    return(
+      <FlexContainer>
+        <Row>
+          <FlexItem>
+            <ProgressBar />
+          </FlexItem>
+          <FlexItem>
+            <Flex>
+              <Dropdown 
+                items={dropDownList}
+                selectedValue="Progress1"
+                onChangeHandler={() => {}}
+                maxRows={15}
+                width="140px"
+              />
+              <Button text="25" icon="fa-plus"/>
+            </Flex>
+          </FlexItem>
+        </Row>
+      </FlexContainer>
+    );
+  }
+};
+
+const mapStateToProps = state => ({
+  ...state.progressData,
+})
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    ...bindActionCreators(
+      {
+        getProgress,
+      },
+      dispatch
+    ),
+  },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
