@@ -48,7 +48,7 @@ class ProgressBar extends React.Component {
     return (
       <StyledContainer>
         <ProgressBarContainer>
-          <StyledProgressBar from={progressFrom} to={progressTo} />
+          <StyledProgressBar from={progressFrom} to={progressTo}>{progressTo}{' '}% </StyledProgressBar>
         </ProgressBarContainer>
       </StyledContainer>
     );
