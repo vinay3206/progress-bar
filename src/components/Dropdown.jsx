@@ -116,7 +116,7 @@ const DropdownContainer = styled.div`
   }
 `
 
-const BaseDropdown = styled.div`
+export const BaseDropdown = styled.div`
   cursor: pointer;
   position: relative;
   background: black;

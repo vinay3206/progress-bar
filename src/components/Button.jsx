@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
     background-color: orange; /* Blue background */
     border: none; /* Remove borders */
     color: white; /* White text */
