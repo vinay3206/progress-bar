@@ -59,7 +59,7 @@ class Home extends React.Component {
     console.log("On Button click");
     const { updateProgress } = this.props.actions;
     const { selectedProgress } = this.state;
-    updateProgress(val, parseInt(selectedProgress));
+    updateProgress(val, parseInt(selectedProgress, 10));
   }
 
   componentDidMount() {

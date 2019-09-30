@@ -39,10 +39,6 @@ const StyledProgressBar = styled.div`
 `;
 
 class ProgressBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { progress, isOverflow } = this.props;
     return (
