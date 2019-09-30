@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import ProgressBar from './Progress-Bar';
 import { Dropdown } from './Dropdown';
 import Button from './Button';
-import { getProgress } from '../redux/actions'
+import { getProgress, updateProgress } from '../redux/actions'
 
 const FlexContainer = styled.div`
   height: 100%;
@@ -55,6 +55,13 @@ class Home extends React.Component {
     })
   }
 
+  onButtonClick = (val) => {
+    console.log("On Button click");
+    const { updateProgress } = this.props.actions;
+    const { selectedProgress } = this.state;
+    updateProgress(val, parseInt(selectedProgress));
+  }
+
   componentDidMount() {
     const { getProgress } = this.props.actions;
     getProgress();
@@ -78,7 +85,7 @@ class Home extends React.Component {
             {
               progressBars.map(bar => {
                 return (
-                  <ProgressBar key={bar} progress={bar} />
+                  <ProgressBar key={bar} progress={bar.progress} isOverflow={bar.isOverflow}/>
                 )
               })
             }
@@ -93,7 +100,7 @@ class Home extends React.Component {
                     selectedValue={selectedProgress}
                     onChangeHandler={this.onProgressBarChange}
                     maxRows={15}
-                    width="140px"
+                    width="9rem"
                   />  
                 :
                   ''
@@ -101,7 +108,7 @@ class Home extends React.Component {
               {
                 buttons.map(val => {
                   return (
-                    <Button text={val} key={val} icon={ (val < 0) ? 'fa-minues' : 'fa-plus' } />
+                    <Button text={val} key={val} icon={ (val < 0) ? 'fa-minues' : 'fa-plus' } onClick={this.onButtonClick.bind(this, val)}/>
                   )
                 })
               }
@@ -115,7 +122,13 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   ...state.progressData,
-  progressBars: state.progressData.bars.map(bar => Math.round((bar*100)/state.progressData.limit))
+  progressBars: state.progressData.bars.map(bar => {
+    const isOverflow = bar > state.progressData.limit;
+    return {
+      progress: isOverflow ? 100 : Math.round((bar*100)/state.progressData.limit),
+      isOverflow,
+    }
+  })
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -123,6 +136,7 @@ const mapDispatchToProps = dispatch => ({
     ...bindActionCreators(
       {
         getProgress,
+        updateProgress,
       },
       dispatch
     ),

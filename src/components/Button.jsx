@@ -9,7 +9,7 @@ const StyledButton = styled.button`
     padding: 8px 16px; /* Some padding */
     font-size: 16px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
-    margin-left: 2px;
+    margin-left: 0.5rem;
     background-position: center;
     transition: background 0.8s;
     outline: none;
@@ -28,9 +28,9 @@ const StyledButton = styled.button`
     }
 `
 
-const Button = ({ text, icon }) => {
+const Button = ({ text, icon, onClick }) => {
     return (
-        <StyledButton>
+        <StyledButton onClick={onClick}>
            <i className={`fa ${icon}`} />
             {text}
         </StyledButton>

@@ -1,4 +1,4 @@
-import { GET_PROGRESS_PENDING, GET_PROGRESS_SUCCESS, GET_PROGRESS_FAILURE } from "./constant";
+import { GET_PROGRESS_PENDING, GET_PROGRESS_SUCCESS, GET_PROGRESS_FAILURE, UPDATE_PROGRESS } from "./constant";
 
 export const getProgress = () => ({
     type: GET_PROGRESS_PENDING,
@@ -17,3 +17,10 @@ export const getProgressFailure = (error) => {
         payload: { error },
     };
 };
+
+export const updateProgress = (value, index) => {
+  return {
+    type: UPDATE_PROGRESS,
+    payload: { value, index }
+  }
+}

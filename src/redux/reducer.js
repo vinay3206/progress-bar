@@ -4,6 +4,7 @@ import {
     GET_PROGRESS_PENDING,
     GET_PROGRESS_FAILURE,
     GET_PROGRESS_SUCCESS,
+    UPDATE_PROGRESS,
 } from "./constant";
 
 export const initialStates = {
@@ -31,4 +32,16 @@ export default createReducer(initialStates, {
         ...initialStates,
         error,
     }),
-}); 
+    [UPDATE_PROGRESS]: (state, { value, index }) => {
+      const { bars } = state;
+      let newValue = bars[index] + value;
+      if(newValue < 0) {
+        newValue = 0;
+      }
+      bars[index] = newValue;
+      return {
+        ...state,
+        bars,
+      }
+    }
+});
