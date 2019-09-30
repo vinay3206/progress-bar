@@ -1,12 +1,12 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   margin: 3rem auto;
   width: 40 rem;
   text-align: center;
 `;
-const ProgressBarContainer = styled.div`
+export const ProgressBarContainer = styled.div`
   padding: 0.3rem;
   background: rgba(0, 0, 0, 0.25);
   border-radius: 6px;
@@ -18,7 +18,7 @@ const progressAnimationStrike = keyframes`
   to   { width: ${(props) => `${props.to}%`} }
 `;
 
-const StyledProgressBar = styled.div`
+export const StyledProgressBar = styled.div`
   height: 18px;
   background-color: ${(props) => props.isOverflow ? '#FF0000' : '#FCBC51'};
   border-radius: 4px; 
@@ -38,7 +38,7 @@ const StyledProgressBar = styled.div`
   animation: ${progressAnimationStrike} 6s;
 `;
 
-class ProgressBar extends React.Component {
+export class ProgressBar extends React.Component {
   render() {
     const { progress, isOverflow } = this.props;
     return (
