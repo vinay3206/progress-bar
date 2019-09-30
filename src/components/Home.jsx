@@ -8,7 +8,7 @@ import { Dropdown } from './Dropdown';
 import Button from './Button';
 import { getProgress, updateProgress } from '../redux/actions'
 
-const FlexContainer = styled.div`
+export const FlexContainer = styled.div`
   height: 100%;
   padding: 0;
   margin: 0;
@@ -22,11 +22,11 @@ const FlexContainer = styled.div`
   flex-direction: column;
 `;
 
-const Row = styled.div`
+export const Row = styled.div`
   width: auto;
 `;
 
-const FlexItem = styled.div`
+export const FlexItem = styled.div`
   padding: 5px;
   margin: 10px;
   line-height: 20px;
@@ -35,12 +35,12 @@ const FlexItem = styled.div`
   text-align: center;
 `;
 
-const Flex = styled.div`
+export const Flex = styled.div`
   display: flex;
   justify-content: space-between;
 `
 
-class Home extends React.Component {
+export class Home extends React.Component {
 
   constructor(props) {
     super(props);
